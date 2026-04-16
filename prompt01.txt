@@ -1,0 +1,7 @@
+i have LM studio running create program that display star graph like  Obsidian  https://obsidian.md
+    ·
+    แปลหน้านี้
+    Spark ideas. From personal notes to journaling, knowledge bases, and project management, Obsidian gives you the tools to come up with ideas and
+    organize them.
+    ---> but this program read data from folder and subfolder (specify 1 folder then program loop with status show )  output is graph like obsidiance
+    and also . go language

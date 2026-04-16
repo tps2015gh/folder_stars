@@ -1,0 +1,10 @@
+.git
+vendor
+node_modules
+.obsidian
+dist
+build
+*.exe
+*.dll
+*.so
+.DS_Store
