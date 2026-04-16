@@ -33,12 +33,12 @@ The goal is to provide a clear, visual overview of your project's or notes' stru
 - **Structural Linking**: Creates implicit links between files/folders and their parent directories, forming a hierarchical "star" graph.
 - **Interactive Web UI**: Provides a force-directed graph with:
   - Drag-and-drop nodes for manual arrangement.
-  - Search functionality with Obsidian-style highlighting (dimming non-matches, highlighting matches).
+  - Search functionality with Obsidian-style highlighting: matches are highlighted with a glow effect, while non-matches are dimmed for clarity.
   - A dynamic context menu (right-click) offering:
-    - "Show in Explorer" (OS file explorer).
-    - "Open Terminal" (PowerShell/Terminal).
-    - "Copy Path" (relative and full).
-    - "Focus/Unfocus" (isolate node and its neighbors).
+    - **Show in Explorer**: Opens the OS file explorer and selects the item.
+    - **Open Terminal**: Opens PowerShell (Windows) or Terminal (macOS/Linux) in the node's directory.
+    - **Copy Path**: Copy Relative or Full (absolute) paths to clipboard with visual confirmation.
+    - **Focus/Unfocus**: Isolate a node and its immediate connections for detailed inspection.
   - Theme toggle (Dark/Light mode).
 - **`.ignore` File Support**: Excludes specified files/directories (e.g., `vendor`, `node_modules`, `.git`) from the graph.
 
