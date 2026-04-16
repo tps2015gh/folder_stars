@@ -202,31 +202,70 @@ const indexHTML = `
     <title>Project Star Graph</title>
     <script src="//unpkg.com/force-graph"></script>
     <style>
-        body { margin: 0; background-color: #1a1a1a; color: #ccc; font-family: sans-serif; }
+        :root {
+            --bg-color: #1a1a1a;
+            --text-color: #ccc;
+            --control-bg: rgba(0,0,0,0.5);
+            --link-color: rgba(255, 255, 255, 0.3);
+        }
+        body.light-mode {
+            --bg-color: #f5f5f5;
+            --text-color: #333;
+            --control-bg: rgba(255,255,255,0.8);
+            --link-color: rgba(0, 0, 0, 0.2);
+        }
+        body { margin: 0; background-color: var(--bg-color); color: var(--text-color); font-family: sans-serif; transition: background-color 0.3s; }
         #graph { width: 100vw; height: 100vh; }
-        .controls { position: absolute; top: 10px; left: 10px; z-index: 10; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; pointer-events: none; }
+        .controls { 
+            position: absolute; top: 10px; left: 10px; z-index: 10; 
+            background: var(--control-bg); padding: 15px; border-radius: 8px; 
+            border: 1px solid #444; pointer-events: auto;
+        }
+        button { 
+            background: #444; color: white; border: none; padding: 5px 10px; 
+            border-radius: 4px; cursor: pointer; margin-top: 10px;
+        }
+        body.light-mode button { background: #ddd; color: #333; }
     </style>
 </head>
 <body>
     <div class="controls">
-        <h3>Project Graph View</h3>
+        <h3 style="margin-top:0">Project Graph View</h3>
         <p id="status">Ready</p>
-        <p style="font-size: 0.8em; color: #888;">Blue: Folders | Green: Files</p>
+        <div style="font-size: 0.85em;">
+            <span style="color: #54a0ff">●</span> Blue: Folders<br>
+            <span style="color: #1dd1a1">●</span> Green: Files
+        </div>
+        <button onclick="toggleTheme()">Toggle Theme</button>
     </div>
     <div id="graph"></div>
 
     <script>
+        let isLightMode = false;
+        let graphInstance = null;
+
+        function toggleTheme() {
+            isLightMode = !isLightMode;
+            document.body.classList.toggle('light-mode');
+            if (graphInstance) {
+                const linkColor = isLightMode ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.3)';
+                graphInstance.linkColor(() => linkColor);
+            }
+        }
+
         fetch('/data')
             .then(res => res.json())
             .then(data => {
                 document.getElementById('status').innerText = 'Loaded ' + data.nodes.length + ' nodes';
-                const Graph = ForceGraph()
+                graphInstance = ForceGraph()
                 (document.getElementById('graph'))
                     .graphData(data)
                     .nodeId('id')
                     .nodeLabel(node => node.id)
-                    .nodeAutoColorBy('group')
-                    .linkDirectionalParticles(1)
+                    .linkColor(() => isLightMode ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.3)')
+                    .linkWidth(1.5)
+                    .linkDirectionalParticles(2)
+                    .linkDirectionalParticleWidth(2)
                     .linkDirectionalParticleSpeed(0.005)
                     .nodeCanvasObject((node, ctx, globalScale) => {
                         const label = node.name;
@@ -234,18 +273,18 @@ const indexHTML = `
                         ctx.font = fontSize + 'px Sans-Serif';
                         
                         // Draw circle
-                        const radius = node.group === 2 ? 4 : 2;
+                        const radius = node.group === 2 ? 5 : 3;
                         ctx.fillStyle = node.group === 2 ? '#54a0ff' : '#1dd1a1';
                         ctx.beginPath();
                         ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI, false);
                         ctx.fill();
 
-                        // Draw text
-                        if (globalScale > 1.5) {
+                        // Draw text on zoom
+                        if (globalScale > 2) {
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
-                            ctx.fillStyle = '#eee';
-                            ctx.fillText(label, node.x, node.y + radius + 4);
+                            ctx.fillStyle = isLightMode ? '#333' : '#eee';
+                            ctx.fillText(label, node.x, node.y + radius + 5);
                         }
                     });
             });
