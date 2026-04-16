@@ -328,6 +328,8 @@ const indexHTML = `
 
         function handleSearch(val) {
             searchQuery = val.toLowerCase();
+            const filteredNodes = allData.nodes.filter(n => n.name.toLowerCase().includes(searchQuery));
+            document.getElementById('status').innerText = 'Found ' + filteredNodes.length + ' item(s)';
             if (graphInstance) graphInstance.nodeCanvasObject(graphInstance.nodeCanvasObject()); // Refresh
         }
 
