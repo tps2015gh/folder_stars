@@ -12,6 +12,7 @@ It includes:
 - Interactive web UI with:
     - Theme toggle (Dark/Light mode).
     - Search functionality with Obsidian-style highlighting (dimming non-matches, highlighting matches).
+    - One-Click Copy: Left-click any node to copy its full path.
     - Node context menu (right-click) for:
         - "Show in Explorer" (OS file explorer).
         - "Open Terminal" (PowerShell/Terminal).

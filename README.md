@@ -18,7 +18,8 @@ The application operates on a simple yet effective client-server model:
     *   Using the `force-graph` JavaScript library, it renders an interactive graph.
     - You can zoom, pan, and drag nodes.
     - Search functionality allows you to quickly find and highlight files.
-    - A right-click context menu provides actions like opening files in Explorer/Terminal, copying paths, and focusing on specific nodes and their immediate connections.
+    - **One-Click Copy**: Left-click any node to instantly copy its full absolute path to your clipboard.
+    - A right-click context menu provides advanced actions like opening files in Explorer/Terminal and focus mode.
     - A theme toggle allows switching between dark and light interfaces for comfortable viewing.
 
 ## Purpose
@@ -34,6 +35,7 @@ The goal is to provide a clear, visual overview of your project's or notes' stru
 - **Interactive Web UI**: Provides a force-directed graph with:
   - Drag-and-drop nodes for manual arrangement.
   - Search functionality with Obsidian-style highlighting: matches are highlighted with a glow effect, while non-matches are dimmed for clarity.
+  - **One-Click Copy**: Left-click any node to instantly copy its full absolute path to the clipboard.
   - A dynamic context menu (right-click) offering:
     - **Show in Explorer**: Opens the OS file explorer and selects the item.
     - **Open Terminal**: Opens PowerShell (Windows) or Terminal (macOS/Linux) in the node's directory.
