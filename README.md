@@ -42,7 +42,7 @@ The goal is to provide a clear, visual overview of your project's or notes' stru
     - **Copy Path**: Copy Relative or Full (absolute) paths to clipboard with visual confirmation.
     - **Focus/Unfocus**: Isolate a node and its immediate connections for detailed inspection.
   - Theme toggle (Dark/Light mode).
-- **`.ignore` File Support**: Excludes specified files/directories (e.g., `vendor`, `node_modules`, `.git`) from the graph.
+- **`.ignore` File Support**: Excludes specified files/directories (e.g., `vendor`, `node_modules`, `.git`, `*.exe`, `*.log`) from the graph for a cleaner visualization.
 
 ## Privacy & Technical Design
 
