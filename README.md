@@ -42,6 +42,15 @@ The goal is to provide a clear, visual overview of your project's or notes' stru
   - Theme toggle (Dark/Light mode).
 - **`.ignore` File Support**: Excludes specified files/directories (e.g., `vendor`, `node_modules`, `.git`) from the graph.
 
+## Privacy & Technical Design
+
+This application is designed to be **local-only** and **privacy-first**:
+
+-   **No AI/Embeddings**: The graph is built using traditional file system traversal and regex-based parsing. It does **not** send your data to any external AI services or use any embedding APIs.
+-   **Local Processing**: All directory scanning and wikilink analysis happen entirely on your machine.
+-   **Static Analysis**: Relationships are established purely through file hierarchy and explicit `[[wikilinks]]` found in your documents.
+-   **Browser-Based Rendering**: The visualization is rendered in your browser using local graph data, ensuring your digital workspace remains private and secure.
+
 ## Prerequisites
 
 - [Go](https://golang.org/dl/) (1.16 or later recommended)
