@@ -51,12 +51,16 @@ The goal is to provide a clear, visual overview of your project's or notes' stru
 
 1.  **Clone/Download** this repository.
 2.  **Navigate** to the project directory in your terminal.
-3.  **Run** the application, specifying the target directory:
+3.  **Build** the executable:
     ```bash
-    go run main.go -dir "/path/to/your/directory"
+    go build -o file_stars.exe main.go
+    ```
+4.  **Run** the application, specifying the target directory:
+    ```bash
+    ./file_stars.exe -dir "/path/to/your/directory"
     ```
     (If no directory is specified, it defaults to the current directory.)
-4.  **Open** your web browser to the address provided in the terminal (e.g., `http://localhost:8080`).
+5.  **Open** your web browser to the address provided in the terminal (e.g., `http://localhost:8080`).
 
 ## Configuration
 
