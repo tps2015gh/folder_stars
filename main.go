@@ -78,9 +78,25 @@ func shouldIgnore(path string) bool {
 }
 
 func main() {
-	flag.StringVar(&targetDir, "dir", ".", "Directory to scan")
-	port := flag.String("port", "8080", "Port to serve on")
+	dirFlag := flag.String("dir", "", "Directory to scan")
+	portFlag := flag.String("port", "", "Port to serve on")
 	flag.Parse()
+
+	targetDir = *dirFlag
+	port := *portFlag
+
+	// If no flags provided, run interactive menu
+	if targetDir == "" && port == "" {
+		targetDir, port = runInteractiveMenu()
+	}
+
+	// Set defaults if still empty
+	if targetDir == "" {
+		targetDir = "."
+	}
+	if port == "" {
+		port = "8080"
+	}
 
 	absPath, err := filepath.Abs(targetDir)
 	if err != nil {
@@ -142,9 +158,61 @@ func main() {
 		tmpl.Execute(w, struct{ AbsPath string }{AbsPath: filepath.ToSlash(absPath)})
 	})
 
-	fmt.Printf("Scanning directory: %s\n", absPath)
-	fmt.Printf("Server started at http://localhost:%s\n", *port)
-	log.Fatal(http.ListenAndServe(":"+*port, nil))
+	fmt.Printf("\n--- Obsidian Star Graph ---\n")
+	fmt.Printf("Scanning: %s\n", absPath)
+	fmt.Printf("Server:   http://localhost:%s\n", port)
+	fmt.Printf("---------------------------\n\n")
+	log.Fatal(http.ListenAndServe(":"+port, nil))
+}
+
+func runInteractiveMenu() (string, string) {
+	reader := bufio.NewReader(os.Stdin)
+
+	fmt.Println("=====================================")
+	fmt.Println("   Obsidian Star Graph Launcher")
+	fmt.Println("=====================================")
+
+	// 1. Directory Selection
+	fmt.Println("\nChoose a directory to scan:")
+	fmt.Println(" [.] Current Directory")
+	
+	subdirs, _ := ioutil.ReadDir(".")
+	validDirs := []string{"."}
+	idx := 1
+	for _, f := range subdirs {
+		if f.IsDir() && !strings.HasPrefix(f.Name(), ".") {
+			fmt.Printf(" [%d] %s\n", idx, f.Name())
+			validDirs = append(validDirs, f.Name())
+			idx++
+		}
+	}
+	fmt.Println(" [C] Enter Custom Path")
+	
+	fmt.Print("\nSelection (default .): ")
+	choice, _ := reader.ReadString('\n')
+	choice = strings.TrimSpace(strings.ToUpper(choice))
+
+	selectedDir := "."
+	if choice == "C" {
+		fmt.Print("Enter custom path: ")
+		selectedDir, _ = reader.ReadString('\n')
+		selectedDir = strings.TrimSpace(selectedDir)
+	} else if choice != "" {
+		val, err := fmt.Sscanf(choice, "%d", &idx)
+		if err == nil && val > 0 && idx < len(validDirs) {
+			selectedDir = validDirs[idx]
+		}
+	}
+
+	// 2. Port Selection
+	fmt.Print("Enter port (default 8080): ")
+	selectedPort, _ := reader.ReadString('\n')
+	selectedPort = strings.TrimSpace(selectedPort)
+	if selectedPort == "" {
+		selectedPort = "8080"
+	}
+
+	return selectedDir, selectedPort
 }
 
 func scanDirectory(root string) Graph {
