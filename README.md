@@ -33,6 +33,9 @@ The goal is to provide a clear, visual overview of your project's or notes' stru
 - **Wikilink Parsing**: Automatically detects and visualizes links in `[[Link]]` format within Markdown and text files.
 - **Structural Linking**: Creates implicit links between files/folders and their parent directories, forming a hierarchical "star" graph.
 - **Interactive Web UI**: Provides a force-directed graph with:
+
+  ![Project Graph Screenshot](screenshot.png)
+
   - Drag-and-drop nodes for manual arrangement.
   - Search functionality with Obsidian-style highlighting: matches are highlighted with a glow effect, while non-matches are dimmed for clarity. The status bar reflects the number of matches found in real-time.
   - **One-Click Copy**: Left-click any node to instantly copy its full absolute path to the clipboard.
