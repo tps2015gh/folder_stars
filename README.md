@@ -53,6 +53,13 @@ This application is designed to be **local-only** and **privacy-first**:
 -   **Static Analysis**: Relationships are established purely through file hierarchy and explicit `[[wikilinks]]` found in your documents.
 -   **Browser-Based Rendering**: The visualization is rendered in your browser using local graph data, ensuring your digital workspace remains private and secure.
 
+## Roles & Collaboration
+
+This project is a collaborative effort between:
+
+-   **Human (User)**: The project architect and primary director, responsible for defining goals, making critical decisions, and overseeing the development lifecycle.
+-   **AI Team (Gemini CLI)**: A high-signal software engineering partner providing autonomous implementation, research, and technical strategy. This team includes specialized agents like the **Security and Privacy Agent** for project integrity.
+
 ## Prerequisites
 
 - [Go](https://golang.org/dl/) (1.16 or later recommended)
@@ -62,16 +69,29 @@ This application is designed to be **local-only** and **privacy-first**:
 
 1.  **Clone/Download** this repository.
 2.  **Navigate** to the project directory in your terminal.
-3.  **Build** the executable:
-    ```bash
-    go build -o file_stars.exe main.go
-    ```
+3.  **Build** the executable using the provided scripts:
+    *   **Windows**:
+        ```cmd
+        .\build.bat
+        ```
+    *   **Linux/macOS**:
+        ```bash
+        chmod +x build.sh
+        ./build.sh
+        ```
 4.  **Run** the application, specifying the target directory:
     ```bash
-    ./file_stars.exe -dir "/path/to/your/directory"
+    ./folder_star.exe -dir "/path/to/your/directory"
     ```
     (If no directory is specified, it defaults to the current directory.)
 5.  **Open** your web browser to the address provided in the terminal (e.g., `http://localhost:8080`).
+
+## Security & Privacy Assurance
+
+In addition to its **local-only** and **privacy-first** design, this project uses a dedicated **Security and Privacy Agent** (`Agents/security_privacy_agent.md`) to:
+- Continuously audit code for accidental credential exposure.
+- Ensure no external API calls or telemetry are introduced.
+- Verify that sensitive data is correctly excluded from both scanning and version control.
 
 ## Configuration
 
