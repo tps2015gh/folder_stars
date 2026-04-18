@@ -53,12 +53,16 @@ This application is designed to be **local-only** and **privacy-first**:
 -   **Static Analysis**: Relationships are established purely through file hierarchy and explicit `[[wikilinks]]` found in your documents.
 -   **Browser-Based Rendering**: The visualization is rendered in your browser using local graph data, ensuring your digital workspace remains private and secure.
 
-## Roles & Collaboration
+## Roles & Collaboration (Team Session)
 
-This project is a collaborative effort between:
+This project is a continuous collaborative session between:
 
--   **Human (User)**: The project architect and primary director, responsible for defining goals, making critical decisions, and overseeing the development lifecycle.
--   **AI Team (Gemini CLI)**: A high-signal software engineering partner providing autonomous implementation, research, and technical strategy. This team includes specialized agents like the **Security and Privacy Agent** for project integrity.
+-   **Architect & Director (Human)**: Sets the vision, high-level architecture, and final approval on all changes.
+-   **AI Engineering Team (Gemini CLI)**:
+    *   **Lead Developer**: Handles core logic, refactoring, and feature implementation.
+    *   **Security Agent**: Dedicated to code auditing and vulnerability scanning.
+    *   **License & Law Agent**: Ensures compliance with open-source licenses and legal standards.
+    *   **Privacy Agent**: Guardians of data sovereignty, ensuring the "local-only" mandate is never breached.
 
 ## Prerequisites
 
@@ -86,12 +90,12 @@ This project is a collaborative effort between:
     (If no directory is specified, it defaults to the current directory.)
 5.  **Open** your web browser to the address provided in the terminal (e.g., `http://localhost:8080`).
 
-## Security & Privacy Assurance
+## Security, Law & Privacy Assurance
 
-In addition to its **local-only** and **privacy-first** design, this project uses a dedicated **Security and Privacy Agent** (`Agents/security_privacy_agent.md`) to:
-- Continuously audit code for accidental credential exposure.
-- Ensure no external API calls or telemetry are introduced.
-- Verify that sensitive data is correctly excluded from both scanning and version control.
+The AI Team includes specialized automated agents (`Agents/`) that perform regular checks:
+- **Security Agent** (`Agents/security_agent.md`): Scans for hardcoded credentials and unsafe code patterns.
+- **License & Law Agent** (`Agents/license_law_agent.md`): Verifies that dependencies and project code adhere to the **MIT License** and legal best practices.
+- **Privacy Agent** (`Agents/privacy_agent.md`): Exhaustively verifies that no telemetry, external API calls, or data leakage exists.
 
 ## Configuration
 
